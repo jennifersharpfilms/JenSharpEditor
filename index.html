@@ -55,8 +55,8 @@
   .nav-links a:hover { color: var(--accent); }
 
   /* HERO */
-  .hero { height: 100vh; max-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
-  .hero-left { display: flex; flex-direction: column; justify-content: flex-end; padding: 0 48px 72px; position: relative; z-index: 2; }
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; }
+  .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 100px 48px 72px; position: relative; z-index: 2; }
   .hero-eyebrow { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
   .hero-name { font-family: var(--font-display); font-size: clamp(80px, 9vw, 140px); line-height: 0.92; letter-spacing: 0.01em; color: var(--white); opacity: 0; animation: fadeUp 0.8s 0.35s forwards; }
   .hero-name .line2 { color: var(--accent); display: block; }
@@ -67,9 +67,9 @@
   .btn-primary:hover { background: #fff; transform: translateY(-2px); }
   .btn-secondary { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; border: 1px solid var(--border); color: rgba(242,240,235,0.7); font-family: var(--font-body); font-size: 12px; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
   .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
-  .hero-right { position: relative; overflow: hidden; opacity: 0; animation: fadeIn 1.2s 0.4s forwards; display: flex; flex-direction: column; }
-  .hero-reels-stack { display: flex; flex-direction: column; height: 100%; gap: 3px; }
-  .hero-reel-item { position: relative; overflow: hidden; flex: 1; background: var(--mid); cursor: none; }
+  .hero-right { opacity: 0; animation: fadeIn 1.2s 0.4s forwards; display: flex; flex-direction: column; justify-content: center; padding: 100px 0 40px; }
+  .hero-reels-stack { display: flex; flex-direction: column; gap: 3px; }
+  .hero-reel-item { position: relative; background: var(--mid); }
   .hero-reel-item a.reel-link { position: absolute; inset: 0; z-index: 10; display: block; }
   .hero-reel-item .reel-thumb { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease, filter 0.4s ease; filter: grayscale(20%); }
   .hero-reel-item:hover .reel-thumb { transform: scale(1.04); filter: grayscale(0%); }
@@ -100,10 +100,10 @@
   /* REELS */
   .featured-reels { background: var(--black); }
   .reels-grid-featured { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-bottom: 3px; }
-  .reel-card { position: relative; overflow: hidden; background: var(--mid); cursor: none; }
+  .reel-card { position: relative; background: var(--mid); }
   .reel-card a.reel-link { position: absolute; inset: 0; z-index: 10; display: block; }
-  .reel-card.large { aspect-ratio: 16/9; }
-  .reel-card.medium { aspect-ratio: 16/9; }
+  .reel-card.large { }
+  .reel-card.medium { }
   .reel-thumb { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease, filter 0.4s ease; filter: grayscale(20%); }
   .reel-card:hover .reel-thumb { transform: scale(1.04); filter: grayscale(0%); }
   .reel-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.2) 50%, transparent 100%); transition: opacity 0.3s; }
@@ -119,10 +119,10 @@
   .category-section + .category-section { padding-top: 0; }
   .category-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 3px; }
   .grid-four { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
-  .grid-four .reel-card { aspect-ratio: 16/9; min-width: 0; }
+  .grid-four .reel-card { min-width: 0; }
   .category-grid-four { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; width: 100%; }
-  .category-grid-four .reel-card { aspect-ratio: 16/9; min-width: 0; }
-  .category-grid .reel-card { aspect-ratio: 16/9; }
+  .category-grid-four .reel-card { min-width: 0; }
+  .category-grid .reel-card { }
 
   /* BIO */
   .bio-section { background: var(--mid); display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 0; overflow: hidden; }
@@ -235,6 +235,29 @@
     .cursor, .cursor-ring { display: none !important; }
     body { cursor: auto; }
   }
+
+  /* ── BELOW-VIDEO LABELS ── */
+  .reel-info-below {
+    background: var(--mid);
+    padding: 8px 14px 10px;
+    border-top: 1px solid var(--border);
+  }
+  .reel-category-below {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2px;
+  }
+  .reel-title-below {
+    font-family: var(--font-display);
+    font-size: 15px;
+    letter-spacing: 0.03em;
+    color: var(--white);
+    line-height: 1.1;
+    font-weight: 400;
+  }
+
 </style>
 </head>
 <body>
@@ -269,21 +292,15 @@
   <div class="hero-right">
     <div class="hero-reels-stack">
       <div class="hero-reel-item">
-        <img class="reel-thumb" src="https://jensharpeditor.carrd.co/assets/videos/video03_thumbnail.jpg" alt="Una Great Movie">
-        <div class="reel-overlay"></div>
-        <div class="reel-play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#f5a623"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="reel-info"><p class="reel-category">Reel</p><h3 class="reel-title">Narrative Editing Reel</h3></div>
-        <a class="reel-link" href="https://vimeo.com/556315595" target="_blank" rel="noopener noreferrer"></a>
+        <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/556315595?badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div>
+        <div class="reel-info-below"><p class="reel-category-below">Reel</p><h3 class="reel-title-below">Narrative Editing Reel</h3></div>
       </div>
       <div class="hero-reel-item">
-        <img class="reel-thumb" src="https://jensharpeditor.carrd.co/assets/videos/video06_thumbnail.jpg" alt="Documentary Editing Reel">
-        <div class="reel-overlay"></div>
-        <div class="reel-play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#f5a623"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="reel-info"><p class="reel-category">Reel</p><h3 class="reel-title">Documentary Editing Reel</h3></div>
-        <a class="reel-link" href="https://vimeo.com/556945224" target="_blank" rel="noopener noreferrer"></a>
+        <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/556945224?badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div>
+        <div class="reel-info-below"><p class="reel-category-below">Reel</p><h3 class="reel-title-below">Documentary Editing Reel</h3></div>
       </div>
     </div>
-    <span class="hero-vertical-text">Jennifer Sharp — Editor — Los Angeles</span>
+
   </div>
   <div class="hero-scroll-indicator">
     <div class="scroll-line"></div>
@@ -319,32 +336,20 @@
   </div>
   <div class="grid-four reveal">
     <div class="reel-card medium">
-      <img class="reel-thumb" src="https://jensharpeditor.carrd.co/assets/videos/video11_thumbnail.jpg" alt="Una Great Movie">
-      <div class="reel-overlay"></div>
-      <div class="reel-play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#f5a623"><path d="M8 5v14l11-7z"/></svg></div>
-      <div class="reel-info"><p class="reel-category">Comedy</p><h3 class="reel-title">Una Great Movie</h3></div>
-      <a class="reel-link" href="https://vimeo.com/1180341607" target="_blank" rel="noopener noreferrer"></a>
+      <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1180341607?badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div>
+      <div class="reel-info-below"><p class="reel-category-below">Comedy</p><h3 class="reel-title-below">Una Great Movie</h3></div>
     </div>
     <div class="reel-card medium">
-      <img class="reel-thumb" src="https://jensharpeditor.carrd.co/assets/videos/video12_thumbnail.jpg" alt="I'm Through With White Girls">
-      <div class="reel-overlay"></div>
-      <div class="reel-play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#f5a623"><path d="M8 5v14l11-7z"/></svg></div>
-      <div class="reel-info"><p class="reel-category">Comedy</p><h3 class="reel-title">I'm Through With White Girls</h3></div>
-      <a class="reel-link" href="https://vimeo.com/1180341920" target="_blank" rel="noopener noreferrer"></a>
+      <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1180341920?badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div>
+      <div class="reel-info-below"><p class="reel-category-below">Comedy</p><h3 class="reel-title-below">I'm Through With White Girls</h3></div>
     </div>
     <div class="reel-card medium">
-      <img class="reel-thumb" src="https://jensharpeditor.carrd.co/assets/videos/video01_thumbnail.jpg" alt="Una Great Movie">
-      <div class="reel-overlay"></div>
-      <div class="reel-play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#f5a623"><path d="M8 5v14l11-7z"/></svg></div>
-      <div class="reel-info"><p class="reel-category">Drama</p><h3 class="reel-title">Una Great Movie</h3></div>
-      <a class="reel-link" href="https://vimeo.com/1180341389" target="_blank" rel="noopener noreferrer"></a>
+      <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1180341389?badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div>
+      <div class="reel-info-below"><p class="reel-category-below">Drama</p><h3 class="reel-title-below">Una Great Movie</h3></div>
     </div>
     <div class="reel-card medium">
-      <img class="reel-thumb" src="https://jensharpeditor.carrd.co/assets/videos/video02_thumbnail.jpg" alt="Una Great Movie">
-      <div class="reel-overlay"></div>
-      <div class="reel-play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#f5a623"><path d="M8 5v14l11-7z"/></svg></div>
-      <div class="reel-info"><p class="reel-category">Drama</p><h3 class="reel-title">Una Great Movie</h3></div>
-      <a class="reel-link" href="https://vimeo.com/1180342169" target="_blank" rel="noopener noreferrer"></a>
+      <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1180342169?badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div>
+      <div class="reel-info-below"><p class="reel-category-below">Drama</p><h3 class="reel-title-below">Una Great Movie</h3></div>
     </div>
   </div>
 </section>
@@ -356,32 +361,20 @@
   </div>
   <div class="category-grid reveal">
     <div class="reel-card medium">
-      <img class="reel-thumb" src="https://jensharpeditor.carrd.co/assets/videos/video08_thumbnail.jpg" alt="SUSTAIN">
-      <div class="reel-overlay"></div>
-      <div class="reel-play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#f5a623"><path d="M8 5v14l11-7z"/></svg></div>
-      <div class="reel-info"><p class="reel-category">Feature Doc</p><h3 class="reel-title">SUSTAIN</h3></div>
-      <a class="reel-link" href="https://vimeo.com/1180339841" target="_blank" rel="noopener noreferrer"></a>
+      <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1180339841?badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div>
+      <div class="reel-info-below"><p class="reel-category-below">Feature Doc</p><h3 class="reel-title-below">SUSTAIN</h3></div>
     </div>
     <div class="reel-card medium">
-      <img class="reel-thumb" src="https://jensharpeditor.carrd.co/assets/videos/video07_thumbnail.jpg" alt="Chasing a Great Movie">
-      <div class="reel-overlay"></div>
-      <div class="reel-play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#f5a623"><path d="M8 5v14l11-7z"/></svg></div>
-      <div class="reel-info"><p class="reel-category">4-Part Docuseries</p><h3 class="reel-title">Chasing a Great Movie</h3></div>
-      <a class="reel-link" href="https://vimeo.com/1180341797" target="_blank" rel="noopener noreferrer"></a>
+      <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1180341797?badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div>
+      <div class="reel-info-below"><p class="reel-category-below">4-Part Docuseries</p><h3 class="reel-title-below">Chasing a Great Movie</h3></div>
     </div>
     <div class="reel-card medium">
-      <img class="reel-thumb" src="https://jensharpeditor.carrd.co/assets/videos/video05_thumbnail.jpg" alt="Solitary Worlds">
-      <div class="reel-overlay"></div>
-      <div class="reel-play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#f5a623"><path d="M8 5v14l11-7z"/></svg></div>
-      <div class="reel-info"><p class="reel-category">Short Doc</p><h3 class="reel-title">Solitary Worlds</h3></div>
-      <a class="reel-link" href="https://vimeo.com/1180340554" target="_blank" rel="noopener noreferrer"></a>
+      <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1180340554?badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div>
+      <div class="reel-info-below"><p class="reel-category-below">Short Doc</p><h3 class="reel-title-below">Solitary Worlds</h3></div>
     </div>
     <div class="reel-card medium">
-      <img class="reel-thumb" src="https://jensharpeditor.carrd.co/assets/videos/video04_thumbnail.jpg" alt="Feet Off the Ground">
-      <div class="reel-overlay"></div>
-      <div class="reel-play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#f5a623"><path d="M8 5v14l11-7z"/></svg></div>
-      <div class="reel-info"><p class="reel-category">24-Episode Docuseries</p><h3 class="reel-title">Feet Off the Ground</h3></div>
-      <a class="reel-link" href="https://vimeo.com/1180341092" target="_blank" rel="noopener noreferrer"></a>
+      <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1180341092?badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div>
+      <div class="reel-info-below"><p class="reel-category-below">24-Episode Docuseries</p><h3 class="reel-title-below">Feet Off the Ground</h3></div>
     </div>
   </div>
 </section>
@@ -589,5 +582,6 @@
     });
   });
 </script>
+<script src="https://player.vimeo.com/api/player.js"></script>
 </body>
 </html>
